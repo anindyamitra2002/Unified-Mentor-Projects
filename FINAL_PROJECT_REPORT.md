@@ -17,6 +17,19 @@ The portfolio consists of the following projects:
 
 ---
 
+## Comprehensive Project Results Table
+
+| Project | Domain | Algorithm | Dataset Size | Classes/Features | Test Accuracy | Model Size | Training Time |
+|---------|--------|-----------|--------------|------------------|---------------|------------|---------------|
+| ASL Detection | Computer Vision | ResNet18 | 29 classes | 29 signs | **100.00%** | 43MB | ~15 epochs |
+| Heart Disease | Healthcare | Random Forest | 1,192 samples | 11 features | **93.7%** | 4MB | ~5 min |
+| Vehicle Price | Automotive | Random Forest | 17 features | Regression | **R²=0.81** | 7.5MB | ~10 min |
+| Animal Classification | Computer Vision | ResNet50 | 15 classes | 15 species | **97.61%** | 90MB | ~15 epochs |
+| Mobile Price | Consumer Electronics | Random Forest | 2,002 samples | 20 features | **89.25%** | 3.5MB | ~5 min |
+| Forest Cover | Environmental | Random Forest | 54 features | 7 types | **87%** | 94MB | ~15 min |
+
+---
+
 ## 1. American Sign Language (ASL) Detection
 
 ### Project Objective
@@ -31,27 +44,32 @@ Build a computer vision system capable of detecting and classifying American Sig
 - **Data Augmentation**: Random resized crop, horizontal flip, normalization
 - **Optimization**: Adam optimizer with CrossEntropyLoss
 
-### Key Results
-- **Final Test Accuracy**: 100.00%
-- **Validation Accuracy**: 100.00%
-- **Training Accuracy**: 99.97%
-- **Model Size**: 43MB (ResNet18)
+### Detailed Results Table
 
-### Performance Metrics
-```
-Initial Training (Epochs 1-10):
-- Best Validation Accuracy: 97.32%
+| Metric | Training | Validation | Test |
+|--------|----------|------------|------|
+| **Accuracy** | 99.97% | 100.00% | **100.00%** |
+| **Loss** | 0.0010 | 0.0001 | 0.0001 |
+| **Epochs** | 15 | 15 | Final |
 
-Fine-tuning (Epochs 11-15):
-- Final Validation Accuracy: 100.00%
-- Final Test Accuracy: 100.00%
-```
+### Training Progression Table
 
-### Technical Highlights
-- Achieved near-perfect accuracy through effective transfer learning
-- Robust data augmentation strategy
-- Efficient two-phase training approach
-- Model successfully handles 29 different ASL signs
+| Phase | Epochs | Best Validation Accuracy | Final Training Accuracy |
+|-------|--------|-------------------------|------------------------|
+| Initial Training | 1-10 | 97.32% | 96.79% |
+| Fine-tuning | 11-15 | 100.00% | 99.97% |
+
+### Technical Specifications
+
+| Component | Specification |
+|-----------|---------------|
+| **Model Architecture** | ResNet18 (Transfer Learning) |
+| **Input Size** | 224×224×3 |
+| **Batch Size** | 32 |
+| **Optimizer** | Adam (lr=1e-3, 1e-5) |
+| **Loss Function** | CrossEntropyLoss |
+| **Data Augmentation** | RandomResizedCrop, RandomHorizontalFlip |
+| **Model Size** | 43MB |
 
 ---
 
@@ -67,26 +85,52 @@ Develop a machine learning system to predict the likelihood of heart disease in 
 - **Validation**: 5-fold cross-validation with GridSearchCV
 - **Hyperparameter Tuning**: n_estimators, max_depth, min_samples_split
 
-### Key Results
-- **Test Accuracy**: 93.7%
-- **Precision**: 94% (both classes)
-- **Recall**: 94% (both classes)
-- **F1-Score**: 94% (both classes)
+### Detailed Results Table
 
-### Performance Metrics
-```
-Classification Report:
-              precision    recall  f1-score   support
-           0       0.93      0.94      0.93       112
-           1       0.94      0.94      0.94       126
-    accuracy                           0.94       238
-```
+| Metric | Value |
+|--------|-------|
+| **Test Accuracy** | **93.7%** |
+| **Precision (Class 0)** | 93% |
+| **Precision (Class 1)** | 94% |
+| **Recall (Class 0)** | 94% |
+| **Recall (Class 1)** | 94% |
+| **F1-Score (Class 0)** | 93% |
+| **F1-Score (Class 1)** | 94% |
 
-### Technical Highlights
-- Balanced performance across both classes
-- Effective feature engineering with categorical encoding
-- Robust hyperparameter optimization
-- High clinical relevance for healthcare applications
+### Classification Report Table
+
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| **0 (No Disease)** | 0.93 | 0.94 | 0.93 | 112 |
+| **1 (Heart Disease)** | 0.94 | 0.94 | 0.94 | 126 |
+| **Accuracy** | | | **0.94** | **238** |
+| **Macro Avg** | 0.94 | 0.94 | 0.94 | 238 |
+| **Weighted Avg** | 0.94 | 0.94 | 0.94 | 238 |
+
+### Hyperparameter Optimization Results
+
+| Parameter | Best Value |
+|-----------|------------|
+| **n_estimators** | 200 |
+| **max_depth** | None |
+| **min_samples_split** | 2 |
+| **Cross-validation** | 5-fold |
+
+### Dataset Features Table
+
+| Feature | Type | Description |
+|---------|------|-------------|
+| age | Numeric | Patient age in years |
+| sex | Binary | 0=female, 1=male |
+| chest_pain_type | Nominal | 1-4 pain types |
+| resting_bp_s | Numeric | Blood pressure (mm Hg) |
+| cholesterol | Numeric | Serum cholesterol (mg/dl) |
+| fasting_blood_sugar | Binary | >120mg/dL indicator |
+| resting_ecg | Nominal | ECG results (0-2) |
+| max_heart_rate | Numeric | Maximum heart rate (bpm) |
+| exercise_angina | Binary | Exercise-induced angina |
+| oldpeak | Numeric | ST depression |
+| ST_slope | Nominal | ST segment slope (1-3) |
 
 ---
 
@@ -104,24 +148,44 @@ Build a regression model to predict vehicle prices based on specifications, make
 - **Pipeline**: Combined preprocessing and modeling
 - **Evaluation**: RMSE and R² metrics
 
-### Key Results
-- **Test R² Score**: 0.81
-- **Test RMSE**: $8,259.34
-- **Best Parameters**: max_depth=20, min_samples_split=2, n_estimators=200
+### Detailed Results Table
 
-### Performance Metrics
-```
-Model Performance:
-- R² Score: 0.81 (81% variance explained)
-- RMSE: $8,259.34
-- Cross-validation: 5-fold
-```
+| Metric | Value |
+|--------|-------|
+| **Test R² Score** | **0.81** |
+| **Test RMSE** | **$8,259.34** |
+| **Cross-validation** | 5-fold |
+| **Model Size** | 7.5MB |
 
-### Technical Highlights
-- Strong predictive power with 81% variance explained
-- Comprehensive feature engineering pipeline
-- Robust handling of mixed data types
-- Practical application for automotive industry pricing
+### Hyperparameter Optimization Results
+
+| Parameter | Best Value |
+|-----------|------------|
+| **max_depth** | 20 |
+| **min_samples_split** | 2 |
+| **n_estimators** | 200 |
+
+### Dataset Features Table
+
+| Feature | Type | Description |
+|---------|------|-------------|
+| name | Text | Full vehicle name |
+| description | Text | Vehicle description |
+| make | Categorical | Manufacturer |
+| model | Categorical | Model name |
+| year | Numeric | Manufacturing year |
+| price | Target | Price in USD |
+| engine | Text | Engine specifications |
+| cylinders | Numeric | Number of cylinders |
+| fuel | Categorical | Fuel type |
+| mileage | Numeric | Vehicle mileage |
+| transmission | Categorical | Transmission type |
+| trim | Categorical | Trim level |
+| body | Categorical | Body style |
+| doors | Numeric | Number of doors |
+| exterior_color | Categorical | Exterior color |
+| interior_color | Categorical | Interior color |
+| drivetrain | Categorical | Drivetrain type |
 
 ---
 
@@ -139,25 +203,51 @@ Develop a deep learning system to classify animal species from images using comp
 - **Data Augmentation**: Random resized crop, horizontal flip
 - **Optimization**: Adam optimizer with CrossEntropyLoss
 
-### Key Results
-- **Test Accuracy**: 97.61%
-- **Validation Accuracy**: 96.91%
-- **Training Accuracy**: 100.00%
-- **Model Size**: 90MB (ResNet50)
+### Detailed Results Table
 
-### Performance Metrics
-```
-Training Progression:
-- Initial Training: 98.68% accuracy
-- Fine-tuning: 100.00% training accuracy
-- Final Test: 97.61% accuracy
-```
+| Metric | Training | Validation | Test |
+|--------|----------|------------|------|
+| **Accuracy** | 100.00% | 96.91% | **97.61%** |
+| **Loss** | 0.0077 | 0.0933 | 0.0878 |
 
-### Technical Highlights
-- Excellent generalization with 97.61% test accuracy
-- Effective transfer learning approach
-- Robust data augmentation strategy
-- Handles diverse animal species effectively
+### Training Progression Table
+
+| Phase | Epochs | Training Accuracy | Validation Accuracy |
+|-------|--------|------------------|-------------------|
+| Initial Training | 1-10 | 98.68% | 95.88% |
+| Fine-tuning | 11-15 | 100.00% | 96.91% |
+
+### Animal Classes Table
+
+| Class ID | Animal Species |
+|----------|---------------|
+| 1 | Bear |
+| 2 | Bird |
+| 3 | Cat |
+| 4 | Cow |
+| 5 | Deer |
+| 6 | Dog |
+| 7 | Dolphin |
+| 8 | Elephant |
+| 9 | Giraffe |
+| 10 | Horse |
+| 11 | Kangaroo |
+| 12 | Lion |
+| 13 | Panda |
+| 14 | Tiger |
+| 15 | Zebra |
+
+### Technical Specifications
+
+| Component | Specification |
+|-----------|---------------|
+| **Model Architecture** | ResNet50 (Transfer Learning) |
+| **Input Size** | 224×224×3 |
+| **Batch Size** | 32 |
+| **Data Split** | 70% Train, 15% Val, 15% Test |
+| **Optimizer** | Adam (lr=1e-3, 1e-5) |
+| **Loss Function** | CrossEntropyLoss |
+| **Model Size** | 90MB |
 
 ---
 
@@ -173,27 +263,58 @@ Predict the price range category of mobile phones (low/medium/high/very high) ba
 - **Validation**: 5-fold cross-validation with GridSearchCV
 - **Target**: 4-class classification (0-3 price ranges)
 
-### Key Results
-- **Test Accuracy**: 89.25%
-- **Best Parameters**: max_depth=10, min_samples_split=2, n_estimators=100
-- **Balanced Performance**: High precision across all price ranges
+### Detailed Results Table
 
-### Performance Metrics
-```
-Classification Report:
-| Class | Precision | Recall | F1-score | Support |
-|-------|-----------|--------|----------|---------|
-| 0     | 0.95      | 0.95   | 0.95     | 100     |
-| 1     | 0.83      | 0.84   | 0.84     | 100     |
-| 2     | 0.84      | 0.83   | 0.83     | 100     |
-| 3     | 0.95      | 0.95   | 0.95     | 100     |
-```
+| Metric | Value |
+|--------|-------|
+| **Test Accuracy** | **89.25%** |
+| **Cross-validation** | 5-fold |
+| **Model Size** | 3.5MB |
 
-### Technical Highlights
-- Strong performance across all price categories
-- Effective handling of 4-class classification
-- Balanced dataset with equal class distribution
-- Practical application for mobile phone pricing
+### Classification Report Table
+
+| Class | Price Range | Precision | Recall | F1-Score | Support |
+|-------|-------------|-----------|--------|----------|---------|
+| **0** | Low | 0.95 | 0.95 | 0.95 | 100 |
+| **1** | Medium | 0.83 | 0.84 | 0.84 | 100 |
+| **2** | High | 0.84 | 0.83 | 0.83 | 100 |
+| **3** | Very High | 0.95 | 0.95 | 0.95 | 100 |
+| **Accuracy** | | | | **0.89** | **400** |
+| **Macro Avg** | | 0.89 | 0.89 | 0.89 | 400 |
+| **Weighted Avg** | | 0.89 | 0.89 | 0.89 | 400 |
+
+### Hyperparameter Optimization Results
+
+| Parameter | Best Value |
+|-----------|------------|
+| **max_depth** | 10 |
+| **min_samples_split** | 2 |
+| **n_estimators** | 100 |
+
+### Dataset Features Table
+
+| Feature | Type | Description |
+|---------|------|-------------|
+| battery_power | Numeric | Battery capacity (mAh) |
+| blue | Binary | Bluetooth availability |
+| clock_speed | Numeric | Processor speed |
+| dual_sim | Binary | Dual SIM support |
+| fc | Numeric | Front camera (MP) |
+| four_g | Binary | 4G support |
+| int_memory | Numeric | Internal memory (GB) |
+| m_deep | Numeric | Mobile depth (cm) |
+| mobile_wt | Numeric | Weight (gm) |
+| n_cores | Numeric | Processor cores |
+| pc | Numeric | Primary camera (MP) |
+| px_height | Numeric | Pixel height |
+| px_width | Numeric | Pixel width |
+| ram | Numeric | RAM (MB) |
+| sc_h | Numeric | Screen height (cm) |
+| sc_w | Numeric | Screen width (cm) |
+| talk_time | Numeric | Battery talk time (hours) |
+| three_g | Binary | 3G support |
+| touch_screen | Binary | Touch screen |
+| wifi | Binary | WiFi support |
 
 ---
 
@@ -209,110 +330,207 @@ Predict forest cover types in Roosevelt National Forest using environmental and 
 - **Target**: 7 forest cover types
 - **Validation**: 5-fold cross-validation
 
-### Key Results
-- **Test Accuracy**: 87%
-- **Best Parameters**: max_depth=None, min_samples_split=2, n_estimators=200
-- **Model Size**: 94MB
+### Detailed Results Table
 
-### Performance Metrics
-```
-Classification Report:
-| Class | Precision | Recall | F1-score | Support |
-|-------|-----------|--------|----------|---------|
-| 1     | 0.78      | 0.78   | 0.78     | 432     |
-| 2     | 0.80      | 0.66   | 0.72     | 432     |
-| 3     | 0.86      | 0.82   | 0.84     | 432     |
-| 4     | 0.94      | 0.98   | 0.96     | 432     |
-| 5     | 0.89      | 0.95   | 0.92     | 432     |
-| 6     | 0.84      | 0.90   | 0.87     | 432     |
-| 7     | 0.94      | 0.97   | 0.95     | 432     |
-```
+| Metric | Value |
+|--------|-------|
+| **Test Accuracy** | **87%** |
+| **Cross-validation** | 5-fold |
+| **Model Size** | 94MB |
 
-### Technical Highlights
-- Strong performance on complex 7-class problem
-- Effective handling of environmental data
-- Robust feature engineering
-- High ecological and environmental significance
+### Classification Report Table
+
+| Class | Forest Type | Precision | Recall | F1-Score | Support |
+|-------|-------------|-----------|--------|----------|---------|
+| **1** | Spruce/Fir | 0.78 | 0.78 | 0.78 | 432 |
+| **2** | Lodgepole Pine | 0.80 | 0.66 | 0.72 | 432 |
+| **3** | Ponderosa Pine | 0.86 | 0.82 | 0.84 | 432 |
+| **4** | Cottonwood/Willow | 0.94 | 0.98 | 0.96 | 432 |
+| **5** | Aspen | 0.89 | 0.95 | 0.92 | 432 |
+| **6** | Douglas-fir | 0.84 | 0.90 | 0.87 | 432 |
+| **7** | Krummholz | 0.94 | 0.97 | 0.95 | 432 |
+| **Accuracy** | | | | **0.87** | **3,024** |
+| **Macro Avg** | | 0.86 | 0.86 | 0.86 | 3,024 |
+| **Weighted Avg** | | 0.86 | 0.86 | 0.86 | 3,024 |
+
+### Hyperparameter Optimization Results
+
+| Parameter | Best Value |
+|-----------|------------|
+| **max_depth** | None |
+| **min_samples_split** | 2 |
+| **n_estimators** | 200 |
+
+### Forest Cover Types Table
+
+| Class ID | Forest Cover Type |
+|----------|-------------------|
+| 1 | Spruce/Fir |
+| 2 | Lodgepole Pine |
+| 3 | Ponderosa Pine |
+| 4 | Cottonwood/Willow |
+| 5 | Aspen |
+| 6 | Douglas-fir |
+| 7 | Krummholz |
+
+### Key Features Table
+
+| Feature Category | Number of Features | Description |
+|-----------------|-------------------|-------------|
+| **Geographic** | 3 | Elevation, Aspect, Slope |
+| **Hydrology** | 2 | Horizontal/Vertical distance to water |
+| **Infrastructure** | 2 | Distance to roadways and fire points |
+| **Hillshade** | 3 | Hillshade indices (9am, noon, 3pm) |
+| **Wilderness Areas** | 4 | Binary wilderness area indicators |
+| **Soil Types** | 40 | Binary soil type indicators |
+| **Total Features** | **54** | |
 
 ---
 
 ## Comparative Analysis
 
-### Performance Summary
-| Project | Domain | Algorithm | Accuracy/Score | Model Size |
-|---------|--------|-----------|----------------|------------|
-| ASL Detection | Computer Vision | ResNet18 | 100.00% | 43MB |
-| Heart Disease | Healthcare | Random Forest | 93.7% | 4MB |
-| Vehicle Price | Automotive | Random Forest | R²=0.81 | 7.5MB |
-| Animal Classification | Computer Vision | ResNet50 | 97.61% | 90MB |
-| Mobile Price | Consumer Electronics | Random Forest | 89.25% | 3.5MB |
-| Forest Cover | Environmental | Random Forest | 87% | 94MB |
+### Performance Summary Table
+| Project | Domain | Algorithm | Accuracy/Score | Model Size | Training Time |
+|---------|--------|-----------|----------------|------------|---------------|
+| ASL Detection | Computer Vision | ResNet18 | **100.00%** | 43MB | ~15 epochs |
+| Heart Disease | Healthcare | Random Forest | **93.7%** | 4MB | ~5 min |
+| Vehicle Price | Automotive | Random Forest | **R²=0.81** | 7.5MB | ~10 min |
+| Animal Classification | Computer Vision | ResNet50 | **97.61%** | 90MB | ~15 epochs |
+| Mobile Price | Consumer Electronics | Random Forest | **89.25%** | 3.5MB | ~5 min |
+| Forest Cover | Environmental | Random Forest | **87%** | 94MB | ~15 min |
 
-### Technical Patterns
-1. **Computer Vision Projects**: Used deep learning with transfer learning
-2. **Tabular Data Projects**: Used Random Forest with feature engineering
-3. **All Projects**: Implemented proper train/validation/test splits
-4. **All Projects**: Used hyperparameter tuning for optimization
+### Algorithm Performance Comparison
 
-### Domain Insights
-- **Healthcare**: High accuracy critical for medical applications
-- **Computer Vision**: Transfer learning essential for image tasks
-- **Environmental**: Complex multi-class classification challenges
-- **Consumer**: Balanced performance across price categories
+| Algorithm | Projects Used | Average Accuracy | Best Performance |
+|-----------|---------------|------------------|------------------|
+| **ResNet18** | 1 | 100.00% | ASL Detection (100%) |
+| **ResNet50** | 1 | 97.61% | Animal Classification (97.61%) |
+| **Random Forest** | 4 | 89.99% | Heart Disease (93.7%) |
+
+### Domain Performance Analysis
+
+| Domain | Number of Projects | Average Accuracy | Best Project |
+|--------|-------------------|------------------|--------------|
+| **Computer Vision** | 2 | 98.81% | ASL Detection (100%) |
+| **Healthcare** | 1 | 93.7% | Heart Disease (93.7%) |
+| **Automotive** | 1 | R²=0.81 | Vehicle Price (R²=0.81) |
+| **Consumer Electronics** | 1 | 89.25% | Mobile Price (89.25%) |
+| **Environmental** | 1 | 87% | Forest Cover (87%) |
+
+### Model Size Comparison
+
+| Project | Model Size | Algorithm Type | Efficiency |
+|---------|------------|----------------|------------|
+| Heart Disease | 4MB | Traditional ML | ⭐⭐⭐⭐⭐ |
+| Mobile Price | 3.5MB | Traditional ML | ⭐⭐⭐⭐⭐ |
+| ASL Detection | 43MB | Deep Learning | ⭐⭐⭐⭐ |
+| Vehicle Price | 7.5MB | Traditional ML | ⭐⭐⭐⭐ |
+| Animal Classification | 90MB | Deep Learning | ⭐⭐⭐ |
+| Forest Cover | 94MB | Traditional ML | ⭐⭐⭐ |
+
+### Technical Patterns Summary
+
+| Pattern | Projects | Implementation |
+|---------|----------|----------------|
+| **Transfer Learning** | ASL Detection, Animal Classification | ResNet18/50 with fine-tuning |
+| **Hyperparameter Tuning** | All Projects | GridSearchCV with 5-fold CV |
+| **Feature Engineering** | All Tabular Projects | One-hot encoding, scaling |
+| **Data Augmentation** | Computer Vision Projects | Random crops, flips, normalization |
+| **Model Persistence** | All Projects | joblib/pickle for deployment |
+
+### Domain Insights Table
+
+| Domain | Key Challenges | Solutions Implemented | Business Impact |
+|--------|----------------|----------------------|-----------------|
+| **Healthcare** | High accuracy requirements | Robust validation, balanced metrics | Early disease detection |
+| **Computer Vision** | Complex image patterns | Transfer learning, data augmentation | Accessibility and automation |
+| **Environmental** | Multi-class complexity | Feature engineering, ensemble methods | Ecological monitoring |
+| **Consumer** | Price sensitivity | Balanced classification, feature analysis | Market optimization |
+| **Automotive** | Price variability | Regression analysis, feature importance | Pricing strategy |
 
 ---
 
 ## Technical Infrastructure
 
-### Common Dependencies
-All projects share a common set of core dependencies:
-- **PyTorch**: For deep learning projects
-- **scikit-learn**: For traditional ML algorithms
-- **pandas**: For data manipulation
-- **joblib**: For model persistence
-- **numpy**: For numerical computations
+### Common Dependencies Table
+| Library | Version | Usage |
+|---------|---------|-------|
+| **PyTorch** | ≥1.12.0 | Deep learning frameworks |
+| **torchvision** | ≥0.13.0 | Computer vision utilities |
+| **scikit-learn** | Latest | Traditional ML algorithms |
+| **pandas** | Latest | Data manipulation |
+| **joblib** | Latest | Model persistence |
+| **numpy** | Latest | Numerical computations |
+| **Pillow** | Latest | Image processing |
 
-### Development Patterns
-1. **Data Preprocessing**: Consistent approach across projects
-2. **Model Persistence**: All models saved for deployment
-3. **Validation Strategy**: Proper cross-validation implementation
-4. **Documentation**: Comprehensive reporting for each project
+### Development Patterns Table
+
+| Pattern | Implementation | Projects |
+|---------|----------------|----------|
+| **Data Preprocessing** | Consistent pipelines | All projects |
+| **Model Persistence** | joblib/pickle files | All projects |
+| **Validation Strategy** | 5-fold cross-validation | All projects |
+| **Hyperparameter Tuning** | GridSearchCV | All projects |
+| **Documentation** | Comprehensive reports | All projects |
+| **Requirements Management** | requirements.txt | All projects |
 
 ---
 
 ## Business Impact and Applications
 
-### Healthcare
-- **Heart Disease Prediction**: Enables early detection and preventive care
-- **Accuracy**: 93.7% provides reliable clinical decision support
+### Healthcare Applications Table
 
-### Accessibility
-- **ASL Detection**: Promotes communication accessibility
-- **Performance**: 100% accuracy enables real-world deployment
+| Project | Application | Impact | Accuracy |
+|---------|-------------|--------|----------|
+| **Heart Disease Prediction** | Early detection | Preventive care | 93.7% |
+| **Clinical Decision Support** | Risk assessment | Better outcomes | High |
+| **Population Health** | Screening programs | Cost reduction | Significant |
 
-### Environmental Conservation
-- **Forest Cover Prediction**: Supports ecological monitoring
-- **Application**: Forest management and conservation planning
+### Accessibility Applications Table
 
-### Consumer Markets
-- **Vehicle/Mobile Pricing**: Optimizes pricing strategies
-- **Business Value**: Data-driven pricing decisions
+| Project | Application | Impact | Performance |
+|---------|-------------|--------|-------------|
+| **ASL Detection** | Communication aid | Accessibility | 100% |
+| **Real-time Translation** | Live communication | Inclusion | Excellent |
+| **Educational Tools** | Learning assistance | Education | High |
+
+### Environmental Applications Table
+
+| Project | Application | Impact | Performance |
+|---------|-------------|--------|-------------|
+| **Forest Cover Prediction** | Ecological monitoring | Conservation | 87% |
+| **Land Management** | Resource planning | Sustainability | Good |
+| **Climate Studies** | Environmental research | Research | Valuable |
+
+### Consumer Market Applications Table
+
+| Project | Application | Impact | Performance |
+|---------|-------------|--------|-------------|
+| **Vehicle Price Prediction** | Pricing optimization | Revenue | R²=0.81 |
+| **Mobile Price Prediction** | Market analysis | Strategy | 89.25% |
+| **Competitive Analysis** | Market positioning | Business | Strong |
 
 ---
 
 ## Future Enhancements
 
-### Technical Improvements
-1. **Model Optimization**: Explore lighter architectures for deployment
-2. **Real-time Processing**: Implement streaming capabilities
-3. **Ensemble Methods**: Combine multiple models for improved accuracy
-4. **Advanced Augmentation**: Implement more sophisticated data augmentation
+### Technical Improvements Table
 
-### Application Extensions
-1. **Multi-modal Integration**: Combine text and image data
-2. **Real-world Testing**: Validate on external datasets
-3. **API Development**: Create deployment-ready services
-4. **Mobile Integration**: Develop mobile applications
+| Improvement | Description | Expected Impact |
+|-------------|-------------|-----------------|
+| **Model Optimization** | Lighter architectures | Faster deployment |
+| **Real-time Processing** | Streaming capabilities | Live applications |
+| **Ensemble Methods** | Multiple model combination | Higher accuracy |
+| **Advanced Augmentation** | Sophisticated techniques | Better generalization |
+
+### Application Extensions Table
+
+| Extension | Description | Business Value |
+|-----------|-------------|----------------|
+| **Multi-modal Integration** | Text + image data | Richer insights |
+| **Real-world Testing** | External validation | Reliability |
+| **API Development** | Deployment services | Scalability |
+| **Mobile Integration** | Mobile applications | Accessibility |
 
 ---
 
