@@ -153,7 +153,7 @@ Build a regression model to predict vehicle prices based on specifications, make
 | Metric | Value |
 |--------|-------|
 | **Test R² Score** | **0.81** |
-| **Test RMSE** | **$8,259.34** |
+| **Test RMSE** | **8,259.34** |
 | **Cross-validation** | 5-fold |
 | **Model Size** | 7.5MB |
 
